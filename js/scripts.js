@@ -1,26 +1,33 @@
 //UI logic
 
-function getTriangleValue(){
-    const length1 = document.getElementById("input1").value;
-    const length2 = document.getElementById("input2").value;
-    const length3 = document.getElementById("input3").value;
-
-
+function hideResults() {
+    document.getElementById("equilateral").setAttribute("class", "hidden");
+    document.getElementById("isosceles").setAttribute("class", "hidden");
+    document.getElementById("equilateral").setAttribute("class", "hidden");
 }
-
-function setFormSubmissionEventHandler() {
-    let form = document.querySelector("form");
-    form.addEventListener("submit", function(event){
-      event.preventDefault();
-      getTriangleValue();
-      
-    });
-  }
 
 
 window.onload = function() {
+    document.querySelector("form").onsubmit = function (event) {
+        event.preventDefault();
+        hideResults();
+        const firstLength = parseInt(document.querySelector("input#input1").value);
+        const secondLength = parseInt(document.querySelector("input#input2").value);
+        const thirdLength = parseInt(document.querySelector("input#input3").value);
 
-    setFormSubmissionEventHandler();
+        if(firstLength === secondLength && firstLength === thirdLength){
+            document.getElementById("equilateral").removeAttribute("class");
+
+        }else if(firstLength === secondLength || firstLength === thirdLength || secondLength === thirdLength){
+            document.getElementById("isosceles").removeAttribute("class");
+
+        }else{
+            document.getElementById("scalene").removeAttribute("class");
+
+        }
+
+        
 
   };
 
+};
